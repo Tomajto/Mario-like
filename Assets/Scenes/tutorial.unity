@@ -180,7 +180,7 @@ SpriteRenderer:
   m_SortingLayerID: 46903179
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8617241951447371316, guid: d39ab3682dc806048a1882446c095791, type: 3}
+  m_Sprite: {fileID: -4800939821801123987, guid: 25d1f11ca6db5b3458f616ea0b7a1132, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1957,7 +1957,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.95, y: 3.15}
+  m_Size: {x: 3.58, y: 9.13}
   m_Direction: 0
 --- !u!50 &1016591537
 Rigidbody2D:
@@ -1974,7 +1974,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 10
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2030,7 +2030,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7947843148597026873, guid: 9b3b1b6f867f31343ad702a501181ca7, type: 3}
+  m_Sprite: {fileID: 4031972943744510012, guid: 7a183c59ad5e2d248a24111e5798297a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2049,14 +2049,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1016591535}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.72, y: -0.53, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 222892053}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1016591540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2074,6 +2074,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  sprite1: {fileID: 4031972943744510012, guid: 7a183c59ad5e2d248a24111e5798297a, type: 3}
+  sprite2: {fileID: 4624703394970210534, guid: 79f2a8579e16df748a9a31faedbe6a03, type: 3}
+  switchTime: 0.2
 --- !u!1 &1271947453
 GameObject:
   m_ObjectHideFlags: 0

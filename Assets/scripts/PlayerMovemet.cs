@@ -10,6 +10,26 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Sprite sprite1; // First frame of the animation
+    [SerializeField] private Sprite sprite2; // Second frame of the animation
+    [SerializeField] private float switchTime = 0.2f; // Time interval between frames
+
+    private SpriteRenderer spriteRenderer;
+    private float timer;
+    private bool isUsingSprite1 = true;
+
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer == null)
+        {
+            Debug.LogError("No SpriteRenderer found on this GameObject.");
+        }
+
+        // Set the initial sprite
+        spriteRenderer.sprite = sprite1;
+    }
 
     void Update()
     {
@@ -27,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Flip();
+        HandleAnimation(); // Call the animation handler
     }
 
     private void FixedUpdate()
@@ -48,6 +69,29 @@ public class PlayerMovement : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
+        }
+    }
+
+    private void HandleAnimation()
+    {
+        if (Mathf.Abs(horizontal) > 0) // Player is moving
+        {
+            timer += Time.deltaTime;
+
+            if (timer >= switchTime)
+            {
+                // Switch between sprites
+                isUsingSprite1 = !isUsingSprite1;
+                spriteRenderer.sprite = isUsingSprite1 ? sprite1 : sprite2;
+
+                // Reset timer
+                timer = 0f;
+            }
+        }
+        else
+        {
+            // Reset to the first sprite when idle
+            spriteRenderer.sprite = sprite1;
         }
     }
 }
