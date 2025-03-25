@@ -2,109 +2,70 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public float speed = 2f;
-    public float chaseSpeed = 3f;
-    public Transform pointA, pointB;
-    private Vector3 target;
-    private Rigidbody2D rb;
-    private Transform player;
+    public Transform pointA, pointB; // Patrol points
+    public Transform player; // Player reference
+    public float patrolSpeed = 2f;
+    public float chaseSpeed = 3.5f;
+    public float detectionRange = 5f;
 
-    public float detectionRadius = 5f;
-    public float attackRange = 1f;
-    public int damage = 1;
-    public float knockbackForce = 5f;
-
+    private Transform target;
     private bool isChasing = false;
-    private bool facingRight = true; // Track direction
 
+    private Rigidbody2D rb;
+    public LayerMask groundLayer;
+    public Transform groundCheck;
+    public float groundCheckRadius = 0.1f;
+    private bool isGrounded;
     void Start()
     {
-        if (pointA == null || pointB == null)
-        {
-            Debug.LogError("PointA or PointB is not assigned!", this);
-            return;
-        }
-
-        target = pointA.position;
+        target = pointA; // Start patrolling to Point A
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-
-        if (rb != null)
-        {
-            rb.freezeRotation = true; // Prevents any rotation
-            rb.gravityScale = 1;
-        }
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        if (player == null) return;
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        if (!isGrounded) return;
 
         float playerDistance = Vector2.Distance(transform.position, player.position);
 
-        if (playerDistance <= attackRange)
-        {
-            Attack();
-        }
-        else if (playerDistance <= detectionRadius)
+        if (playerDistance < detectionRange)
         {
             isChasing = true;
+        }
+        else if (isChasing && playerDistance > detectionRange + 1f)
+        {
+            isChasing = false;
+            target = (Vector2.Distance(transform.position, pointA.position) < Vector2.Distance(transform.position, pointB.position)) ? pointA : pointB;
+        }
+
+        if (isChasing)
+        {
             ChasePlayer();
         }
         else
         {
-            isChasing = false;
             Patrol();
         }
     }
 
     void Patrol()
     {
-        float direction = target.x - transform.position.x;
-        rb.linearVelocity = new Vector2(Mathf.Sign(direction) * speed, rb.linearVelocity.y);
-
-        if (Mathf.Abs(direction) < 0.1f)
+        if (Vector2.Distance(transform.position, target.position) < 0.2f)
         {
-            target = target == pointA.position ? pointB.position : pointA.position;
-            FlipTowards(target.x);
+            target = (target == pointA) ? pointB : pointA;
         }
+        MoveTowards(target.position, patrolSpeed);
     }
 
     void ChasePlayer()
     {
-        float direction = player.position.x - transform.position.x;
-        rb.linearVelocity = new Vector2(Mathf.Sign(direction) * chaseSpeed, rb.linearVelocity.y);
-        FlipTowards(player.position.x);
+        MoveTowards(player.position, chaseSpeed);
     }
 
-    void Attack()
+    void MoveTowards(Vector2 destination, float speed)
     {
-        CharacterHealth playerHealth = player.GetComponent<CharacterHealth>();
-        if (playerHealth != null)
-        {
-            playerHealth.TakeDamage(damage);
-            KnockbackPlayer();
-        }
-    }
-
-    void KnockbackPlayer()
-    {
-        Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
-        if (playerRb != null)
-        {
-            Vector2 knockbackDir = (player.position - transform.position).normalized;
-            playerRb.linearVelocity = new Vector2(knockbackDir.x * knockbackForce, playerRb.linearVelocity.y + 2);
-        }
-    }
-
-    void FlipTowards(float targetX)
-    {
-        bool shouldFaceRight = targetX > transform.position.x;
-
-        if (shouldFaceRight != facingRight) // Flip only if needed
-        {
-            facingRight = shouldFaceRight;
-            transform.localScale = new Vector3(facingRight ? 1 : -1, 1, 1); // Flips only on X, prevents Z rotation
-        }
+        Vector2 direction = (destination - (Vector2)transform.position).normalized;
+        rb.linearVelocity = new Vector2(direction.x * speed, rb.linearVelocity.y);
     }
 }
