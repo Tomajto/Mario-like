@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -14,9 +15,9 @@ TagManager:
   - Ground
   - 
   - 
-  - 
-  - 
-  - 
+  - Wall
+  - Player
+  - Enemy
   - 
   - 
   - 
@@ -38,11 +39,14 @@ TagManager:
   - veci do pozadi
   - pozadi
   m_SortingLayers:
-  - name: pozadi
+  - name: Vzad
     uniqueID: 46903179
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Pred
+    uniqueID: 585388289
     locked: 0
   m_RenderingLayers:
   - Default
