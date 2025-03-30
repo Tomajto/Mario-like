@@ -26,19 +26,25 @@ public class Health : MonoBehaviour
     }
     public void TakeDamage(float _damage)
     {
+        if (invulnerable) return;
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
 
         if (currentHealth > 0)
         {
             anim.SetTrigger("hurt");
+            StartCoroutine(Invunerability());
         }
         else
         {
             if (!dead)
             {
-                anim.SetTrigger("die");
                 GetComponent<PlayerMovement>().enabled = false;
-                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
+                foreach (Behaviour component in components)
+                    component.enabled = false;
+
+                anim.SetBool("grounded", true);
+                anim.SetTrigger("die");
+
                 dead = true;
             }
         }
@@ -68,9 +74,10 @@ public class Health : MonoBehaviour
 
     public void Respawn()
     {
+        GetComponent<PlayerMovement>().enabled = true;
         AddHealth(startingHealth);
         anim.ResetTrigger("die");
-        anim.Play("Idle");
+        //anim.Play("Idle");
         StartCoroutine(Invunerability());
         dead = false;
 
