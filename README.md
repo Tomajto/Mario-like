@@ -1,5 +1,3 @@
-Toto je můj první větší projekt sice. Pracoval jsem na tom jenom já (Tomáš) nikdo jinej.
-
 ## Použití
 
 1. Otevřete scénu `MainScene`.
@@ -31,9 +29,6 @@ Tento skript sleduje uplynulý čas a zobrazuje jej na obrazovce.
 
 Tento skript zobrazuje nejlepší čas pro každou úroveň na hlavní obrazovce menu.
 
-1. Forkujte tento repozitář.
-2. Vytvořte novou větev (`git checkout -b feature/nova-funkce`).
-3. Proveďte změny a commitujte (`git commit -am 'Přidání nové funkce'`).
-4. Pushněte větev (`git push origin feature/nova-funkce`).
-5. Vytvořte nový pull request.
+### Majitel
 
+Toto je můj první větší projekt sice. Pracoval jsem na tom jenom já (Tomáš) nikdo jinej.
