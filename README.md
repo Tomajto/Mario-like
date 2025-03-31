@@ -29,6 +29,10 @@ Tento skript sleduje uplynulý čas a zobrazuje jej na obrazovce.
 
 Tento skript zobrazuje nejlepší čas pro každou úroveň na hlavní obrazovce menu.
 
+### `Ostatní skripty`
+
+Tento projekt má mnohem více skriptů než jsou tyto. Jedná se především o skripty na trapky atd.
+
 ### Majitel
 
 Toto je můj první větší projekt sice. Pracoval jsem na tom jenom já (Tomáš) nikdo jinej.
