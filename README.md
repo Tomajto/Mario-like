@@ -36,3 +36,4 @@ Tento projekt má mnohem více skriptů než jsou tyto. Jedná se především o
 ### Majitel
 
 Toto je můj první větší projekt sice. Pracoval jsem na tom jenom já (Tomáš) nikdo jinej.
+Hru si můžete stáhnout na stránce: https://mario-like.netlify.app/
