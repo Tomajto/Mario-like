@@ -6,7 +6,7 @@ public class Finish : MonoBehaviour
     [SerializeField] private GameObject winScreen;
     [SerializeField] private Timer timer;
     [SerializeField] private TextMeshProUGUI winTimeText; // Textový prvek pro zobrazení èasu
-    private const string BestTimeKey = "BestTime"; // Klíè pro uložení nejlepšího èasu
+    [SerializeField] private string levelName; // Název úrovnì pro jedineèný klíè
 
     private void Awake()
     {
@@ -28,11 +28,14 @@ public class Finish : MonoBehaviour
 
     private void SaveBestTime(float currentTime)
     {
-        float bestTime = PlayerPrefs.GetFloat(BestTimeKey, float.MaxValue);
+        string bestTimeKey = "BestTime_" + levelName;
+        float bestTime = PlayerPrefs.GetFloat(bestTimeKey, float.MaxValue);
         if (currentTime < bestTime)
         {
-            PlayerPrefs.SetFloat(BestTimeKey, currentTime);
+            PlayerPrefs.SetFloat(bestTimeKey, currentTime);
             PlayerPrefs.Save();
         }
     }
 }
+
+

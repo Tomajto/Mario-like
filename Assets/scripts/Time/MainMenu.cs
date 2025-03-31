@@ -4,18 +4,20 @@ using TMPro;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI bestTimeText;
-    private const string BestTimeKey = "BestTime"; // Klíè pro naètení nejlepšího èasu
+    [SerializeField] private string levelName; // Název úrovnì pro jedineèný klíè
+    private const string BestTimeKeyPrefix = "BestTime_"; // Prefix pro klíè nejlepšího èasu
 
     private void Start()
     {
-        float bestTime = PlayerPrefs.GetFloat(BestTimeKey, float.MaxValue);
+        string bestTimeKey = BestTimeKeyPrefix + levelName;
+        float bestTime = PlayerPrefs.GetFloat(bestTimeKey, float.MaxValue);
         if (bestTime != float.MaxValue)
         {
             bestTimeText.text = FormatTime(bestTime);
         }
         else
         {
-            bestTimeText.text = "No best time yet";
+            bestTimeText.text = "DNP";
         }
     }
 
@@ -27,3 +29,5 @@ public class MainMenu : MonoBehaviour
         return string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
     }
 }
+
+
