@@ -2,6 +2,7 @@
 
 1. Otevřete scénu `MainScene`.
 2. Spusťte hru kliknutím na tlačítko `Play` v Unity editoru.
+3. Nebo stáhnutí přímo na: https://mario-like.netlify.app/
 
 ## Skripty
 
